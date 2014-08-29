@@ -24,18 +24,6 @@ function Book(name){
     this.enshelf = function(Shelf){
         Shelf.books.push(this.name);
     }
-    this.unshelf = function(Shelf){
-    	var found = false;
-    	for(i=0; i<Shelf.books.length; i++){
-    		if(Shelf.books[i] == this.books[i]){
-    			Shelf.books.splice(i, 1);
-    			found = true;
-    		}
-    		else if(i == Shelf.books.length && found = false){
-    			console.log("That book isn't on the shelf.")
-    		}
-    	}
-    }
 }
 
 var lib = new Library();
@@ -45,7 +33,7 @@ var sid = new Book("Siddhartha");
 var eof = new Book ("East of Eden");
 
 sandman.enshelf(one);
-sid.enshelf(two);
+sid.enshelf(one);
 eof.enshelf(one);
 one.addToLibrary(lib);
 lib.libInfo();
