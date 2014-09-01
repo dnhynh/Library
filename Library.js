@@ -1,39 +1,60 @@
-function Library(){
-   this.shelves = 0;
-   this.books = [];
+function Library() {
+    this.shelvesList = [];
 
-   // print library info
-   this.libInfo = function(){
-        console.log("Number of Shelves: " + this.shelves);
-        console.log(this.books);
-   }
-}
-
-function Shelf(){
-    this.books = [];
-    this.addToLibrary = function(Library){
-        Library.shelves += 1;
-        for(i=0; i<this.books.length; i++){
-            Library.books.push(this.books[i]);
+    this.addShelf = function (Shelf) {
+        this.shelvesList.push(Shelf);
+    }
+    
+    this.libInfo = function(){
+        this.shelves = 0;
+        this.books = [];
+        for(i=0; i< this.shelvesList.length; i++){
+            this.shelves += 1
+            var shelf = this.shelvesList[i].books;
+            for(i=0; i<shelf.length; i++){
+                this.books.push(" " + shelf[i] + " ");
+            }
         }
+        console.log("Shelves: " + this.shelves);
+        console.log("Books: " + this.books);
     }
 }
 
-function Book(name){
+function Shelf() {
+    this.books = [];
+}
+
+function Book(name) {
     this.name = name;
-    this.enshelf = function(Shelf){
+    this.enshelf = function (Shelf) {
         Shelf.books.push(this.name);
+    }
+    this.unshelf = function (Shelf) {
+        for (i = 0; i < Shelf.books.length; i++) {
+            var found = false;
+            if (this.name == Shelf.books[i]) {
+                Shelf.books.splice(i, 1);
+                console.log(this.name + " has been removed from the shelf.");
+                found = true;
+            } 
+            else if (i == Shelf.books.length && found === false){
+                console.log("That book is not on the shelf.");
+            }
+        }
     }
 }
 
 var lib = new Library();
 var one = new Shelf();
-var sandman = new Book("The Sandman");
+var sm = new Book("Sandman");
+var eof = new Book("East of Eden");
 var sid = new Book("Siddhartha");
-var eof = new Book ("East of Eden");
 
-sandman.enshelf(one);
-sid.enshelf(one);
+sm.enshelf(one);
 eof.enshelf(one);
-one.addToLibrary(lib);
+sid.enshelf(one);
+lib.addShelf(one);
+
 lib.libInfo();
+
+sid.unshelf(one);
