@@ -58,3 +58,4 @@ lib.addShelf(one);
 lib.libInfo();
 
 sid.unshelf(one);
+lib.libInfo();
